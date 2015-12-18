@@ -1,7 +1,10 @@
 #include "App.h"
 #include "Game.h"
-//#include "Image.h"
+#include "Image.h"
 //#include "Animation.h"
+
+namespace CERNchase
+{
 
 bool App::Init()
 {
@@ -34,19 +37,13 @@ bool App::Init()
 		return false;
 	}
 	//loading fonts
-	//loadedFonts["font_title"] = TTF_OpenFont("pixel.ttf", 24);		//title for score and life count
+	loadedFonts["font_main"] = TTF_OpenFont("../data/kongtext.ttf", 16);
+	loadedFonts["font_hint"] = TTF_OpenFont("../data/kongtext.ttf", 12);
 	//loadedFonts["font_number"] = TTF_OpenFont("pixel.ttf", 18);		//numbers for score and life count
 	//loadedFonts["font_message"] = TTF_OpenFont("pixel.ttf", 32);	//game over and other messages
 
 	//loading images
-	/*loadedImages["player"] = std::make_shared<Image>("Player.png", renderer);
-	loadedImages["enemy"] = std::make_shared<Image>("Enemy.png", renderer);
-	loadedImages["projectile_enemy"] = std::make_shared<Image>("Projectile_enemy.png", renderer);
-	loadedImages["projectile_player"] = std::make_shared<Image>("Projectile_player.png", renderer);
-	loadedImages["explosion"] = std::make_shared<Image>("Explosion.png", renderer);
-	loadedImages["background1"] = std::make_shared<Image>("Starfield1.png", renderer);
-	loadedImages["background2"] = std::make_shared<Image>("Starfield2.png", renderer);
-	loadedImages["background3"] = std::make_shared<Image>("Starfield3.png", renderer);*/
+	loadedImages["splash"] = std::make_shared<Image>("../data/splash.png");
 
 	//creating game
 	game = std::make_shared<Game>();
@@ -93,13 +90,29 @@ void App::Start()
 	Deinit();
 }
 
+std::shared_ptr<Image> App::GetImage(const std::string &name)
+{
+	std::map<std::string, std::shared_ptr<Image>>::iterator i = loadedImages.find(name);
+	if (i != loadedImages.end())
+		return i->second;
+	return nullptr;
+}
+
+TTF_Font* App::GetFont(const std::string &name)
+{
+	std::map<std::string, TTF_Font*>::iterator fontI = loadedFonts.find(name);
+	if (fontI != loadedFonts.end())
+		return fontI->second;
+	return nullptr;
+}
+
 void App::Deinit()
 {
 	//releasing fonts
-	/*for(auto f_i = loadedFonts.begin(); f_i != loadedFonts.end(); f_i++)
+	for(auto f_i = loadedFonts.begin(); f_i != loadedFonts.end(); f_i++)
 	{
 		TTF_CloseFont(f_i->second);
-	}*/
+	}
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -107,4 +120,6 @@ void App::Deinit()
 	SDL_Quit();
 	TTF_Quit();
 	IMG_Quit();
+}
+
 }

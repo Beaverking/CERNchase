@@ -1,5 +1,7 @@
 #include "App.h"
 
+using namespace CERNchase;
+
 int main(int argc, char** argv)
 {
 	App *app = App::Instance();

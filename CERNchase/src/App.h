@@ -18,10 +18,19 @@
 #define SCREEN_HEIGHT 720
 #define FRAME_TIME 16
 
-//class handles window creation, game loop, SDL initialization
+namespace CERNchase
+{
+
 class Game;
 class Image;
-class Animation;
+class Text;
+
+enum class DrawPivot
+{
+	LEFT_UP,
+	CENTER,
+	CENTER_BOTTOM
+};
 
 
 //Helper struct to deal with 2d coordinates
@@ -69,8 +78,8 @@ public:
 	void Start();
 	SDL_Renderer *GetRenderer() const { return renderer; }
 	Game *GetGame() const { return game.get(); }
-	//std::shared_ptr<Image> GetImage(const std::string &name);
-	//TTF_Font *GetFont(const std::string &name);
+	std::shared_ptr<Image> GetImage(const std::string &name);
+	TTF_Font *GetFont(const std::string &name);
 
 protected:
 	virtual ~App() {};
@@ -85,10 +94,12 @@ private:
 
 	std::shared_ptr<Game> game;	//Game logic implemented here
 
-	//std::map<std::string, std::shared_ptr<Image>> loadedImages;		//All image resources for the game stored here.
-	//std::map<std::string, TTF_Font *> loadedFonts;					//released in Deinit()
+	std::map<std::string, std::shared_ptr<Image>> loadedImages;		//All image resources for the game stored here.
+	std::map<std::string, TTF_Font *> loadedFonts;					//released in Deinit()
 
 	bool exit;
 };
+
+}
 
 #endif
