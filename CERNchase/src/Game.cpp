@@ -184,7 +184,7 @@ void Game::ObjectRow::Update(uint32_t dt, float steer)
 		objects[j]->currScale = OBJECT_MIN_SCALE + distCoef * distCoef;
 		objects[j]->position.y = START_Y + (distCoef * distCoef * static_cast<float>(SCREEN_HEIGHT - START_Y)) * 0.8f;
 		objects[j]->position.x += sideCoef * OBJECT_SIDE_SPEED * dt * distCoef;
-		objects[j]->position.x += steer * dt * (1.0f - distCoef) * 0.5;
+		objects[j]->position.x += steer * dt * std::max((1.0f - distCoef), 0.5f);
 	}
 }
 
