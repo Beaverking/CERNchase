@@ -44,6 +44,8 @@ bool App::Init()
 
 	//loading images
 	loadedImages["splash"] = std::make_shared<Image>("../data/splash.png");
+	loadedImages["rideBg"] = std::make_shared<Image>("../data/gameScreen.png");
+	loadedImages["tree1"] = std::make_shared<Image>("../data/tree1.png");
 
 	//creating game
 	game = std::make_shared<Game>();

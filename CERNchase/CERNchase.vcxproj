@@ -15,12 +15,14 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Obstacle.cpp" />
     <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Image.h" />
+    <ClInclude Include="src\Obstacle.h" />
     <ClInclude Include="src\Text.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
